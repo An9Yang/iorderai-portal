@@ -80,18 +80,6 @@ const CallRecords: React.FC = () => {
     });
   };
 
-  // Group calls by caller phone for multi-window display
-  const groupedCalls = useMemo(() => {
-    const groups: Record<string, CallRecord[]> = {};
-    filteredCalls.forEach(call => {
-      if (!groups[call.callerPhone]) {
-        groups[call.callerPhone] = [];
-      }
-      groups[call.callerPhone].push(call);
-    });
-    return groups;
-  }, [filteredCalls]);
-
   return (
     <div className="space-y-6">
       {/* Header */}
