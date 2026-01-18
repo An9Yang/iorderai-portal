@@ -1,5 +1,6 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'react-router-dom';
 import { mockOrders } from '../../mock/data';
 import type { Order } from '../../types';
 import OrderDetailModal from './OrderDetailModal';
@@ -7,6 +8,7 @@ import CancelOrderModal from './CancelOrderModal';
 
 const Orders: React.FC = () => {
   const { t } = useTranslation();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [orders, setOrders] = useState<Order[]>(mockOrders);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('all');
@@ -15,7 +17,25 @@ const Orders: React.FC = () => {
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [highlightedOrderId, setHighlightedOrderId] = useState<string | null>(null);
   const pageSize = 10;
+
+  // 处理从通话记录页面跳转过来的情况
+  useEffect(() => {
+    const highlightId = searchParams.get('highlight');
+    if (highlightId) {
+      const order = orders.find(o => o.id === highlightId);
+      if (order) {
+        setHighlightedOrderId(highlightId);
+        setSelectedOrder(order);
+        setShowDetailModal(true);
+        // 清除 URL 参数，避免刷新时重复打开
+        setSearchParams({});
+        // 3秒后取消高亮效果
+        setTimeout(() => setHighlightedOrderId(null), 3000);
+      }
+    }
+  }, [searchParams, orders, setSearchParams]);
 
   const filteredOrders = useMemo(() => {
     return orders.filter(order => {
@@ -208,7 +228,14 @@ const Orders: React.FC = () => {
             </thead>
             <tbody className="divide-y divide-gray-200">
               {paginatedOrders.map((order) => (
-                <tr key={order.id} className="hover:bg-gray-50">
+                <tr 
+                  key={order.id} 
+                  className={`hover:bg-gray-50 transition-colors ${
+                    highlightedOrderId === order.id 
+                      ? 'bg-blue-50 ring-2 ring-blue-400 ring-inset animate-pulse' 
+                      : ''
+                  }`}
+                >
                   <td className="px-4 py-4 text-sm font-medium text-blue-600">{order.id}</td>
                   <td className="px-4 py-4 text-sm text-gray-600">{order.customerPhone}</td>
                   <td className="px-4 py-4">

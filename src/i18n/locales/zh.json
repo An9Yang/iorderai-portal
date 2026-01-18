@@ -30,6 +30,7 @@
   "nav": {
     "dashboard": "首页",
     "orders": "订单管理",
+    "callRecords": "通话记录",
     "finance": "财务中心",
     "restaurant": "餐馆信息"
   },
@@ -73,6 +74,7 @@
     "editOrder": "修改订单",
     "cancelReason": "取消原因",
     "cancelReasonPlaceholder": "请输入取消原因",
+    "orderNotes": "订单备注",
     "searchPlaceholder": "搜索订单号或客户电话",
     "dateRange": "日期范围",
     "startDate": "开始日期",
@@ -201,5 +203,38 @@
     "beyondRadius": "至",
     "mapApiKeyMissing": "请配置 Google Maps API Key",
     "mapApiKeyHint": "在 .env 文件中设置 VITE_GOOGLE_MAPS_API_KEY"
+  },
+  "callRecords": {
+    "title": "通话记录",
+    "callId": "通话ID",
+    "callerPhone": "来电号码",
+    "receiverPhone": "接听号码",
+    "callTime": "通话时间",
+    "duration": "通话时长",
+    "callStatus": "通话状态",
+    "relatedOrder": "关联订单",
+    "viewTranscript": "查看对话",
+    "callDetail": "通话详情",
+    "totalCalls": "条通话记录",
+    "searchPlaceholder": "搜索来电号码或通话ID",
+    "noTranscript": "暂无对话内容",
+    "customer": "客户",
+    "ai": "AI助手",
+    "activeWindows": "已打开的对话窗口",
+    "conversationTitle": "对话记录",
+    "conversationHint": "查看顾客与AI的完整对话内容",
+    "orderGenerated": "AI生成的订单",
+    "orderVerifyHint": "核对订单内容与对话是否一致",
+    "goToOrder": "前往订单详情",
+    "itemsCount": "项",
+    "specialNote": "备注",
+    "status": {
+      "completed": "已完成",
+      "missed": "未接听",
+      "in_progress": "通话中"
+    },
+    "liveDemo": "实时演示",
+    "realtimeTranscript": "实时转写中",
+    "waitingForResponse": "等待回复中..."
   }
 }

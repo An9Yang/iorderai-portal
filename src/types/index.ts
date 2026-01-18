@@ -43,6 +43,7 @@ export interface Order {
   deliveryAddress?: string;
   status: 'pending' | 'completed' | 'cancelled';
   cancelReason?: string;
+  notes?: string;           // 订单备注（如：多要餐具、少放辣等）
   createdAt: string;
 }
 
@@ -111,3 +112,25 @@ export interface User {
 }
 
 export type DateRange = 'today' | 'week' | 'month' | 'custom';
+
+// 通话记录相关类型
+export interface CallMessage {
+  id: string;
+  role: 'customer' | 'ai';
+  content: string;
+  timestamp: string;
+}
+
+export type CallStatus = 'completed' | 'missed' | 'in_progress';
+
+export interface CallRecord {
+  id: string;
+  callerPhone: string;        // 来电号码
+  receiverPhone: string;      // 接听号码（餐馆号码）
+  startTime: string;          // 通话开始时间
+  endTime?: string;           // 通话结束时间
+  duration: number;           // 通话时长（秒）
+  status: CallStatus;         // 通话状态
+  orderId?: string;           // 关联的订单ID（如果有）
+  transcript: CallMessage[];  // 通话转写内容
+}

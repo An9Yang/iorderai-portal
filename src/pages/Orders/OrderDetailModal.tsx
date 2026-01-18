@@ -106,6 +106,21 @@ const OrderDetailModal: React.FC<OrderDetailModalProps> = ({ order, onClose }) =
               </div>
             )}
 
+            {/* Order notes */}
+            {order.notes && (
+              <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                <div className="flex items-start gap-2">
+                  <svg className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
+                  </svg>
+                  <div>
+                    <p className="text-sm text-amber-700 font-medium">{t('orders.orderNotes')}</p>
+                    <p className="text-sm text-amber-900 mt-1">{order.notes}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Cancel reason */}
             {order.status === 'cancelled' && order.cancelReason && (
               <div className="p-3 bg-red-50 rounded-lg">
