@@ -12,11 +12,17 @@ interface CallDetailModalProps {
 // 模拟的后续对话（用于演示"通话中"状态）
 const simulatedContinuation: CallMessage[] = [
   { id: 'sim1', role: 'customer', content: '我想点一份宫保鸡丁', timestamp: '' },
-  { id: 'sim2', role: 'ai', content: '好的，宫保鸡丁一份，$15.99。请问还需要其他菜品吗？', timestamp: '' },
+  { id: 'sim2', role: 'ai', content: '好的，宫保鸡丁一份 $15.99。请问还需要别的吗？', timestamp: '' },
   { id: 'sim3', role: 'customer', content: '再来一份炒饭，少放盐', timestamp: '' },
-  { id: 'sim4', role: 'ai', content: '收到，炒饭一份 $12.99，已备注少放盐。目前您的订单小计 $28.98。请问是外卖配送还是到店自取？', timestamp: '' },
-  { id: 'sim5', role: 'customer', content: '外卖，送到 123 Main Street', timestamp: '' },
-  { id: 'sim6', role: 'ai', content: '好的，配送地址是 123 Main Street。配送费 $5.99，税费 $2.61，订单总计 $37.58。请问您使用什么方式支付？', timestamp: '' },
+  { id: 'sim4', role: 'ai', content: '收到，炒饭 $12.99，已备注少放盐。要不要再来点饮料或者小吃？我们的柠檬茶和春卷都挺受欢迎的。', timestamp: '' },
+  { id: 'sim5', role: 'customer', content: '那来一杯柠檬茶吧', timestamp: '' },
+  { id: 'sim6', role: 'ai', content: '好的，柠檬茶 $3.99。您的订单：宫保鸡丁、炒饭少盐、柠檬茶，小计 $32.97。请问外卖还是自取？', timestamp: '' },
+  { id: 'sim7', role: 'customer', content: '外卖，送到 123 Main Street', timestamp: '' },
+  { id: 'sim8', role: 'ai', content: '好的，配送到 123 Main Street。加上配送费和税，总计 $42.55。支付方面，您可以用上次绑定的尾号 4567 的卡直接付款，或者绑定一张新卡，您选哪个？', timestamp: '' },
+  { id: 'sim9', role: 'customer', content: '绑定新卡吧', timestamp: '' },
+  { id: 'sim10', role: 'ai', content: '没问题。我现在给您发一条短信，里面有个链接，点进去就可以绑定新卡了。绑定成功后，下次您报尾号就能直接付款，不用再走一遍这个流程。', timestamp: '' },
+  { id: 'sim11', role: 'customer', content: '好的，我看到短信了', timestamp: '' },
+  { id: 'sim12', role: 'ai', content: '收到您的新卡绑定成功，尾号 8899。已完成扣款 $42.55，订单已生成。预计 30-40 分钟送达，祝您用餐愉快！', timestamp: '' },
 ];
 
 const CallDetailModal: React.FC<CallDetailModalProps> = ({ call, onClose }) => {
