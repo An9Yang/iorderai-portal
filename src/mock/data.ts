@@ -343,6 +343,7 @@ export const mockCallRecords: CallRecord[] = [
     duration: 300,
     status: 'completed',
     orderId: 'ORD-20241226-001',
+    recordingUrl: '/audio/sample-call.mp3',
     transcript: [
       { id: 'm1', role: 'ai', content: '您好，欢迎致电金龙中餐馆，我是AI助手小金，请问有什么可以帮您？', timestamp: '2024-12-26T10:25:05Z' },
       { id: 'm2', role: 'customer', content: '你好，我想点一个宫保鸡丁', timestamp: '2024-12-26T10:25:15Z' },
@@ -367,6 +368,7 @@ export const mockCallRecords: CallRecord[] = [
     duration: 300,
     status: 'completed',
     orderId: 'ORD-20241226-002',
+    recordingUrl: '/audio/sample-call.mp3',
     transcript: [
       { id: 'm1', role: 'ai', content: 'Hello, thank you for calling Golden Dragon Chinese Restaurant. I am your AI assistant. How may I help you today?', timestamp: '2024-12-26T11:10:05Z' },
       { id: 'm2', role: 'customer', content: 'Hi, I want to order General Tso\'s Chicken for pickup', timestamp: '2024-12-26T11:10:20Z' },
@@ -387,6 +389,7 @@ export const mockCallRecords: CallRecord[] = [
     endTime: '2024-12-26T12:02:30Z',
     duration: 150,
     status: 'completed',
+    recordingUrl: '/audio/sample-call.mp3',
     transcript: [
       { id: 'm1', role: 'ai', content: '您好，欢迎致电金龙中餐馆，请问有什么可以帮您？', timestamp: '2024-12-26T12:00:05Z' },
       { id: 'm2', role: 'customer', content: '你好，我想问一下你们营业到几点？', timestamp: '2024-12-26T12:00:20Z' },
@@ -406,6 +409,7 @@ export const mockCallRecords: CallRecord[] = [
     duration: 300,
     status: 'completed',
     orderId: 'ORD-20241226-003',
+    recordingUrl: '/audio/sample-call.mp3',
     transcript: [
       { id: 'm1', role: 'ai', content: 'Hello! Welcome to Golden Dragon. How can I assist you?', timestamp: '2024-12-26T13:30:05Z' },
       { id: 'm2', role: 'customer', content: 'I\'d like to place a large order for a party', timestamp: '2024-12-26T13:30:15Z' },
@@ -429,6 +433,7 @@ export const mockCallRecords: CallRecord[] = [
     duration: 300,
     status: 'completed',
     orderId: 'ORD-20241225-003',
+    recordingUrl: '/audio/sample-call.mp3',
     transcript: [
       { id: 'm1', role: 'ai', content: '您好，金龙中餐馆，有什么可以帮您？', timestamp: '2024-12-25T18:40:05Z' },
       { id: 'm2', role: 'customer', content: '我要点一份糖醋里脊', timestamp: '2024-12-25T18:40:15Z' },
@@ -452,6 +457,7 @@ export const mockCallRecords: CallRecord[] = [
     duration: 300,
     status: 'completed',
     orderId: 'ORD-20241225-004',
+    recordingUrl: '/audio/sample-call.mp3',
     transcript: [
       { id: 'm1', role: 'ai', content: 'Thank you for calling Golden Dragon! How may I help you?', timestamp: '2024-12-25T12:25:05Z' },
       { id: 'm2', role: 'customer', content: 'Hi, I want to order two beef with broccoli for pickup', timestamp: '2024-12-25T12:25:20Z' },

@@ -239,6 +239,11 @@
     },
     "liveDemo": "LIVE",
     "realtimeTranscript": "Real-time transcription",
-    "waitingForResponse": "Waiting for response..."
+    "waitingForResponse": "Waiting for response...",
+    "playRecording": "Play Recording",
+    "pauseRecording": "Pause",
+    "recordingInProgress": "Recording in progress...",
+    "recordingUnavailable": "Recording not available",
+    "recordingError": "Failed to load recording"
   }
 }

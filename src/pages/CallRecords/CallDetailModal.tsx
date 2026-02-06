@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import type { CallRecord, CallMessage, Order } from '../../types';
 import { mockOrders } from '../../mock/data';
+import AudioPlayer from './AudioPlayer';
 
 interface CallDetailModalProps {
   call: CallRecord;
@@ -246,6 +247,9 @@ const CallDetailModal: React.FC<CallDetailModalProps> = ({ call, onClose }) => {
               )}
             </div>
           </div>
+
+          {/* Audio Player */}
+          <AudioPlayer recordingUrl={call.recordingUrl} callStatus={call.status} />
 
           {/* Main Content */}
           <div className={`flex ${relatedOrder ? 'flex-col lg:flex-row' : ''}`}>

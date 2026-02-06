@@ -239,6 +239,11 @@
     },
     "liveDemo": "实时演示",
     "realtimeTranscript": "实时转写中",
-    "waitingForResponse": "等待回复中..."
+    "waitingForResponse": "等待回复中...",
+    "playRecording": "播放录音",
+    "pauseRecording": "暂停",
+    "recordingInProgress": "正在录音中...",
+    "recordingUnavailable": "录音不可用",
+    "recordingError": "录音加载失败"
   }
 }

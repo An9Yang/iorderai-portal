@@ -133,4 +133,5 @@ export interface CallRecord {
   status: CallStatus;         // 通话状态
   orderId?: string;           // 关联的订单ID（如果有）
   transcript: CallMessage[];  // 通话转写内容
+  recordingUrl?: string;      // 通话录音URL
 }
