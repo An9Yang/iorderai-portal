@@ -49,9 +49,9 @@ const Dashboard: React.FC = () => {
 
       {/* Stat cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
-        {statCards.map((card, index) => (
+        {statCards.map((card) => (
           <Link
-            key={index}
+            key={card.link}
             to={card.link}
             className={`${colorMap[card.color].bg} rounded-xl p-6 transition-transform hover:scale-[1.02]`}
           >

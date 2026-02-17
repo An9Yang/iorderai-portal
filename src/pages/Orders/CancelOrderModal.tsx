@@ -22,9 +22,9 @@ const CancelOrderModal: React.FC<CancelOrderModalProps> = ({ order, onClose, onC
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto">
       <div className="flex items-center justify-center min-h-screen px-4">
-        <div className="fixed inset-0 bg-black bg-opacity-50" onClick={onClose} />
+        <div className="fixed inset-0 bg-black/50" onClick={onClose} />
 
-        <div className="relative bg-white rounded-xl shadow-xl max-w-md w-full">
+        <div className="relative bg-white rounded-2xl shadow-xl max-w-md w-full">
           {/* Header */}
           <div className="border-b border-gray-200 px-6 py-4 flex items-center justify-between">
             <h2 className="text-lg font-semibold text-gray-800">{t('orders.cancelOrder')}</h2>

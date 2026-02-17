@@ -1,19 +1,7 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../contexts/AuthContext';
-
-const getPasswordStrength = (password: string): 'weak' | 'medium' | 'strong' => {
-  if (password.length < 8) return 'weak';
-  let score = 0;
-  if (/[a-z]/.test(password)) score++;
-  if (/[A-Z]/.test(password)) score++;
-  if (/[0-9]/.test(password)) score++;
-  if (/[^a-zA-Z0-9]/.test(password)) score++;
-  if (password.length >= 12) score++;
-  if (score >= 4) return 'strong';
-  if (score >= 2) return 'medium';
-  return 'weak';
-};
+import PasswordStrengthBar from './PasswordStrengthBar';
 
 interface ChangePasswordModalProps {
   isOpen: boolean;
@@ -60,18 +48,6 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen, onClo
     } else {
       setError(t('auth.oldPasswordWrong'));
     }
-  };
-
-  const passwordStrength = getPasswordStrength(newPassword);
-  const strengthColors = {
-    weak: 'bg-red-500',
-    medium: 'bg-yellow-500',
-    strong: 'bg-green-500',
-  };
-  const strengthSegments = {
-    weak: 1,
-    medium: 2,
-    strong: 3,
   };
 
   return (
@@ -137,28 +113,7 @@ const ChangePasswordModal: React.FC<ChangePasswordModalProps> = ({ isOpen, onClo
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   placeholder={t('auth.newPasswordPlaceholder')}
                 />
-                {newPassword && (
-                  <div className="mt-2">
-                    <div className="flex space-x-1 mb-1">
-                      {[1, 2, 3].map((seg) => (
-                        <div
-                          key={seg}
-                          className={`h-1.5 flex-1 rounded-full transition-colors ${
-                            seg <= strengthSegments[passwordStrength]
-                              ? strengthColors[passwordStrength]
-                              : 'bg-gray-200'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <span className={`text-xs ${
-                      passwordStrength === 'weak' ? 'text-red-500' :
-                      passwordStrength === 'medium' ? 'text-yellow-600' : 'text-green-500'
-                    }`}>
-                      {t(`auth.password${passwordStrength.charAt(0).toUpperCase() + passwordStrength.slice(1)}`)}
-                    </span>
-                  </div>
-                )}
+                <PasswordStrengthBar password={newPassword} />
               </div>
 
               <div>

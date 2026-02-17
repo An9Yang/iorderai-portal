@@ -3,22 +3,18 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
 import { mockRestaurant } from '../../mock/data';
 import ChangePasswordModal from '../ChangePasswordModal';
+import { useLanguageToggle } from '../../hooks/useLanguageToggle';
 
 interface HeaderProps {
   onMenuClick: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { logout } = useAuth();
+  const { toggleLanguage, currentLanguage } = useLanguageToggle();
   const [showDropdown, setShowDropdown] = useState(false);
   const [showChangePassword, setShowChangePassword] = useState(false);
-
-  const toggleLanguage = () => {
-    const newLang = i18n.language === 'zh' ? 'en' : 'zh';
-    i18n.changeLanguage(newLang);
-    localStorage.setItem('language', newLang);
-  };
 
   const handleLogout = () => {
     if (window.confirm(t('auth.logoutConfirm'))) {
@@ -56,7 +52,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             onClick={toggleLanguage}
             className="px-3 py-1.5 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
           >
-            {i18n.language === 'zh' ? 'EN' : '中文'}
+            {currentLanguage === 'zh' ? 'EN' : '中文'}
           </button>
 
           {/* User dropdown */}

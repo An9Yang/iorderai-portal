@@ -2,11 +2,13 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate, Navigate, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
+import { useLanguageToggle } from '../../hooks/useLanguageToggle';
 
 type LoginTab = 'phone' | 'account';
 
 const Login: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const { toggleLanguage, currentLanguage } = useLanguageToggle();
   const { login, loginWithPhone, sendVerificationCode, isAuthenticated } = useAuth();
   const navigate = useNavigate();
 
@@ -97,12 +99,6 @@ const Login: React.FC = () => {
     return <Navigate to="/" replace />;
   }
 
-  const toggleLanguage = () => {
-    const newLang = i18n.language === 'zh' ? 'en' : 'zh';
-    i18n.changeLanguage(newLang);
-    localStorage.setItem('language', newLang);
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 px-4">
       <div className="w-full max-w-md">
@@ -112,7 +108,7 @@ const Login: React.FC = () => {
             onClick={toggleLanguage}
             className="px-3 py-1.5 text-sm font-medium text-gray-600 bg-white rounded-lg shadow-sm hover:bg-gray-50 transition-colors"
           >
-            {i18n.language === 'zh' ? 'EN' : '中文'}
+            {currentLanguage === 'zh' ? 'EN' : '中文'}
           </button>
         </div>
 

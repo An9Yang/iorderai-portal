@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { mockCallRecords } from '../../mock/data';
 import type { CallRecord } from '../../types';
 import CallDetailModal from './CallDetailModal';
+import { formatDuration } from '../../utils/format';
 
 const CallRecords: React.FC = () => {
   const { t } = useTranslation();
@@ -43,13 +44,6 @@ const CallRecords: React.FC = () => {
   }, [filteredCalls, currentPage]);
 
   const totalPages = Math.ceil(filteredCalls.length / pageSize);
-
-  const formatDuration = (seconds: number) => {
-    if (seconds === 0) return '-';
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
 
   const formatDateTime = (dateString: string) => {
     return new Date(dateString).toLocaleString();

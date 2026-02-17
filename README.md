@@ -4,9 +4,9 @@ iOrderAI Voice Agent 点餐系统的商家管理后台。
 
 ## 技术栈
 
-- **框架**: React 18 + TypeScript + Vite
+- **框架**: React 19 + TypeScript + Vite
 - **样式**: TailwindCSS 4
-- **路由**: React Router v6
+- **路由**: React Router v7
 - **国际化**: i18next (中文/英文)
 - **图表**: Recharts
 - **地图**: Google Maps (@react-google-maps/api)
@@ -15,9 +15,10 @@ iOrderAI Voice Agent 点餐系统的商家管理后台。
 
 | 模块 | 说明 |
 |------|------|
-| 登录 | 商户账号登录 |
+| 登录 | 商户账号登录、手机号验证码登录、忘记密码（4 步向导）、修改密码 |
 | 仪表盘 | 今日订单、收入概览 |
 | 订单管理 | 订单列表、搜索筛选、导出、状态操作 |
+| 通话记录 | 通话列表、对话详情、录音回放、实时演示 |
 | 财务中心 | 财务统计、趋势图表、打款记录 |
 | 餐馆信息 | 基本信息、配送模式、配送范围设置 |
 
@@ -92,21 +93,31 @@ VITE_API_BASE_URL=https://api.iorderai.com/v1
 ```
 src/
 ├── components/          # 通用组件
-│   └── Layout/          # 布局组件 (侧边栏、头部)
+│   ├── Layout/          # 布局组件 (侧边栏、头部)
+│   ├── ChangePasswordModal.tsx  # 修改密码弹窗
+│   ├── PasswordStrengthBar.tsx  # 密码强度指示器
+│   └── ui/              # 基础 UI 组件
 ├── contexts/            # React Context
 │   └── AuthContext.tsx  # 认证状态管理
 ├── hooks/               # 自定义 Hooks
+│   ├── useAudioPlayer.ts       # 录音播放控制
+│   └── useLanguageToggle.ts    # 语言切换
 ├── i18n/                # 多语言配置
 │   └── locales/         # 翻译文件 (zh.json, en.json)
 ├── mock/                # Mock 模拟数据
 │   └── data.ts          # 订单、餐馆、财务模拟数据
 ├── pages/               # 页面组件
+│   ├── CallRecords/     # 通话记录
 │   ├── Dashboard/       # 仪表盘
 │   ├── Finance/         # 财务模块
+│   ├── ForgotPassword/  # 忘记密码
 │   ├── Login/           # 登录页
 │   ├── Orders/          # 订单管理
 │   └── Restaurant/      # 餐馆信息
 ├── types/               # TypeScript 类型定义
+├── utils/               # 共享工具函数
+│   ├── password.ts      # 密码校验与强度计算
+│   └── format.ts        # 格式化工具
 ├── App.tsx              # 应用入口、路由配置
 └── main.tsx             # React 入口
 ```
@@ -123,8 +134,8 @@ src/
 
 当前使用 Mock 数据，测试登录:
 
-- **用户名**: admin
-- **密码**: admin123
+- **账号登录**: 用户名 `demo`，密码 `demo123`
+- **手机号登录**: 任意 10 位手机号，验证码 `123456`
 
 ## 开发说明
 

@@ -2,22 +2,11 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext';
-
-const getPasswordStrength = (password: string): 'weak' | 'medium' | 'strong' => {
-  if (password.length < 8) return 'weak';
-  let score = 0;
-  if (/[a-z]/.test(password)) score++;
-  if (/[A-Z]/.test(password)) score++;
-  if (/[0-9]/.test(password)) score++;
-  if (/[^a-zA-Z0-9]/.test(password)) score++;
-  if (password.length >= 12) score++;
-  if (score >= 4) return 'strong';
-  if (score >= 2) return 'medium';
-  return 'weak';
-};
+import { useLanguageToggle } from '../../hooks/useLanguageToggle';
+import PasswordStrengthBar from '../../components/PasswordStrengthBar';
 
 const ForgotPassword: React.FC = () => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { sendVerificationCode, resetPassword } = useAuth();
   const navigate = useNavigate();
 
@@ -128,23 +117,7 @@ const ForgotPassword: React.FC = () => {
     }
   };
 
-  const toggleLanguage = () => {
-    const newLang = i18n.language === 'zh' ? 'en' : 'zh';
-    i18n.changeLanguage(newLang);
-    localStorage.setItem('language', newLang);
-  };
-
-  const passwordStrength = getPasswordStrength(newPassword);
-  const strengthColors = {
-    weak: 'bg-red-500',
-    medium: 'bg-yellow-500',
-    strong: 'bg-green-500',
-  };
-  const strengthSegments = {
-    weak: 1,
-    medium: 2,
-    strong: 3,
-  };
+  const { toggleLanguage, currentLanguage } = useLanguageToggle();
 
   const steps = [
     t('auth.stepPhone'),
@@ -162,7 +135,7 @@ const ForgotPassword: React.FC = () => {
             onClick={toggleLanguage}
             className="px-3 py-1.5 text-sm font-medium text-gray-600 bg-white rounded-lg shadow-sm hover:bg-gray-50 transition-colors"
           >
-            {i18n.language === 'zh' ? 'EN' : '中文'}
+            {currentLanguage === 'zh' ? 'EN' : '中文'}
           </button>
         </div>
 
@@ -329,29 +302,7 @@ const ForgotPassword: React.FC = () => {
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
                   placeholder={t('auth.newPasswordPlaceholder')}
                 />
-                {/* Password strength bar */}
-                {newPassword && (
-                  <div className="mt-2">
-                    <div className="flex space-x-1 mb-1">
-                      {[1, 2, 3].map((seg) => (
-                        <div
-                          key={seg}
-                          className={`h-1.5 flex-1 rounded-full transition-colors ${
-                            seg <= strengthSegments[passwordStrength]
-                              ? strengthColors[passwordStrength]
-                              : 'bg-gray-200'
-                          }`}
-                        />
-                      ))}
-                    </div>
-                    <span className={`text-xs ${
-                      passwordStrength === 'weak' ? 'text-red-500' :
-                      passwordStrength === 'medium' ? 'text-yellow-600' : 'text-green-500'
-                    }`}>
-                      {t(`auth.password${passwordStrength.charAt(0).toUpperCase() + passwordStrength.slice(1)}`)}
-                    </span>
-                  </div>
-                )}
+                <PasswordStrengthBar password={newPassword} />
               </div>
 
               <div className="mb-6">

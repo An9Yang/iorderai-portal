@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import type { CallRecord, CallMessage, Order } from '../../types';
 import { mockOrders } from '../../mock/data';
 import AudioPlayer from './AudioPlayer';
+import { formatDuration } from '../../utils/format';
 
 interface CallDetailModalProps {
   call: CallRecord;
@@ -125,12 +126,6 @@ const CallDetailModal: React.FC<CallDetailModalProps> = ({ call, onClose }) => {
     });
   };
 
-  const formatDuration = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
-  };
-
   const getStatusStyle = (status: string) => {
     switch (status) {
       case 'completed':
@@ -173,7 +168,7 @@ const CallDetailModal: React.FC<CallDetailModalProps> = ({ call, onClose }) => {
     <div className="fixed inset-0 z-50 overflow-y-auto">
       {/* Backdrop */}
       <div 
-        className="fixed inset-0 bg-black bg-opacity-50 transition-opacity"
+        className="fixed inset-0 bg-black/50 transition-opacity"
         onClick={onClose}
       />
       
