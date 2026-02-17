@@ -108,6 +108,7 @@ export interface WithdrawalBalance {
 export interface User {
   id: string;
   username: string;
+  phone?: string;
   restaurantId: string;
 }
 
